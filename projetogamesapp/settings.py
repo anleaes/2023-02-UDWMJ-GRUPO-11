@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'widget_tweaks',
     'core.apps.CoreConfig',
+    'games.apps.GamesConfig',
+    'items.apps.ItemsConfig',
+    'players.apps.PlayersConfig',
 ]
 
 MIDDLEWARE = [
