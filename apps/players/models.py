@@ -9,7 +9,9 @@ class Player(models.Model):
     last_name = models.CharField('Sobrenome', max_length=100) 
     address = models.CharField('Endereco', max_length=200)   
     email = models.EmailField('E-mail',null=False, blank=False)
-    
+
+# NÃO ESQUECER DE ADICIONAR "inventory" acima
+
 # ESPAÇO PARA CLASSE INVENTORY
 
     class Meta:
