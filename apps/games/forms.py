@@ -6,3 +6,4 @@ class GameForm(forms.ModelForm):
     class Meta:
         model = Game
         exclude = ('created_on' , 'updated_on',)
+        
