@@ -25,6 +25,7 @@
                     <th scope="col">Sobrenome</th>
                     <th scope="col">Endereco</th>
                     <th scope="col">E-mail</th>
+                    <th scope="col">Inventario</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -38,12 +39,22 @@
                             <td>{{ player.last_name }}</td>
                             <td>{{ player.address }}</td>
                             <td>{{ player.email }}</td>
+                            <td>{{ player.player_inventory }}</td>
                             <td>
+                                {% for player_inventory in player_inventories %}
+                                    {% if player_inventory.player_id == player.id %}
+                                        <li>{{ player_inventory.item }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
                                 <a href="{% url 'players:edit_player' player.id %}" class="btn btn-primary btn-sm">Editar</a>
                             </td>
                             <td>
                                 <a href="{% url 'players:delete_player' player.id %}" class="btn btn-danger btn-sm ">Excluir</a>
                             </td>
+                            <td>   
+                                <a href="{% url 'playermatches:add_playermatch' player.id %}" class="btn btn-danger btn-sm ">Pedir</a>
+                           </td>
                         </tr> 
                     {% endfor %}
                 </tbody>

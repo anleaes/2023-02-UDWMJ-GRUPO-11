@@ -10,9 +10,7 @@ class Player(models.Model):
     address = models.CharField('Endereco', max_length=200)   
     email = models.EmailField('E-mail',null=False, blank=False)
 
-# NÃO ESQUECER DE ADICIONAR "inventory" acima
-
-# ESPAÇO PARA CLASSE INVENTORY
+    player_inventory = models.ManyToManyField(Item, through='PlayerInventory', blank=True)
 
     class Meta:
         verbose_name = 'Jogador'
@@ -22,4 +20,14 @@ class Player(models.Model):
     def __str__(self):
         return self.first_name
 
-# ESPAÇO PARA CLASSE INVENTORY
+class PlayerInventory(models.Model):
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Inventario'
+        verbose_name_plural = 'Inventarios'
+        ordering =['id']
+
+    def __str__(self):
+        return self.item.name
