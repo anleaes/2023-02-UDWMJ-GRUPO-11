@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    Lista de Jogadore em Partidas - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+    <div class="container">
+        <br />
+        <h5><b>Lista de Jogadores em Partidas</b></h5>
+        <div class="row">
+            <div class ="col-md-12">
+            <br />
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Jogador</th>
+                    <th scope="col">Partida</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                        </td>
+                        <td>
+                            <a href="{% url 'playermatches:delete_playermatch' playermatch.id %}" class="btn btn-danger btn-sm ">Excluir</a>
+                        </td>
+                    </tr> 
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+<!--POSSÍVEL ERRO COM ORDER.STATUS-->
