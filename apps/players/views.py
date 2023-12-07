@@ -1,9 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PlayerForm
-from .models import Player, Item
-
-# IMPORTE A CLASSE INVENTORY ACIMA!
-
+from .models import Player, Item, PlayerInventory
 
 
 def add_player(request):
@@ -20,11 +17,17 @@ def add_player(request):
     context['form'] = form
     return render(request, template_name, context)
 
-
-
-# ESPAÇO PARA SCRIPT DA CLASSE INVENTORY!
-
-
+def list_players(request):
+    template_name = 'players/list_players.html'
+    player_inventory = PlayerInventory.objects.filter()
+    items = Item.objects.filter()
+    players = Player.objects.filter()
+    context = {
+        'players': players,
+        'items': items,
+        'player_inventories': player_inventories
+    }
+    return render(request, template_name, context)
 
 def edit_player(request, id_player):
     template_name = 'players/add_player.html'
