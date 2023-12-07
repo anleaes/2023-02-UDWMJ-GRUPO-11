@@ -2,7 +2,7 @@
 
 {% block title %}
 
-    Lista de Jogadore em Partidas - {{ block.super }}
+    Jogadores em Partidas - {{ block.super }}
 
 {% endblock title %}
 
@@ -10,7 +10,7 @@
 
     <div class="container">
         <br />
-        <h5><b>Lista de Jogadores em Partidas</b></h5>
+        <h5><b>Jogadores em Partidas</b></h5>
         <div class="row">
             <div class ="col-md-12">
             <br />
@@ -18,19 +18,65 @@
                 <thead>
                     <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Jogador</th>
-                    <th scope="col">Partida</th>
+                    <th scope="col">Partidas do Jogador</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                        </td>
-                        <td>
-                            <a href="{% url 'playermatches:delete_playermatch' playermatch.id %}" class="btn btn-danger btn-sm ">Excluir</a>
-                        </td>
-                    </tr> 
-                {% endfor %}
+                    {% for playermatch in playermatch %}
+                        <tr>
+                            <th scope="row">
+                                {% if playermatch.status == 'Finalizado' or playermatch.status == 'Cancelado' %}
+                                    <p style="color:darkgray;" >{{ playermatch.id }}</p>
+                                {% else %}
+                                    {{ playermatch.id }}
+                                {% endif %}
+                            </th>
+                            <td>
+                                {% if playermatch.status == 'Finalizado' or playermatch.status == 'Cancelado' %}
+                                    <p style="color:darkgray;" >{{ playermatch.status }}</p>
+                                {% else %}
+                                    {{ playermatch.status }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% for player in players %}
+                                    {% if playermatch.player_id == player.id %}
+                                        {% if playermatch.status == 'Finalizado' or playermatch.status == 'Cancelado' %}
+                                            <p style="color:darkgray;" >{{ player.first_name }} {{ player.last_name }}</p>
+                                        {% else %}
+                                            {{ player.first_name }} {{ player.last_name }}
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}   
+                            </td>
+                            <td>
+                                {% if playermatch.status == 'Finalizado' or playermatch.status == 'Cancelado' %}
+                                    <a href="#" class="btn btn-primary btn-sm disabled">Adicionar itens</a>
+                                {% else %}
+                                    <a href="{% url 'playermatches:add_playermatch_item' playermatch.id %}" class="btn btn-primary btn-sm">Adicionar itens</a>
+                                {% endif %}
+                                <br /><br />
+                                {% for playermatch_item in playermatches_items %}
+                                    {% if playermatch_item.playermatch_id == playermatch.id %}
+                                        Partida: {{ playermatch_item.match}}<br /> 
+                                        Jogador: {{ playermatch_item.player}}<br />
+                                        Quantidade: {{ playermatch_item.quantity}}<br />
+                                        <a href="{% url 'playermatches:delete_playermatch_item' playermatch_item.id %}">Excluir Item</a><br /><br />
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{% url 'playermatches:edit_playermatch_status' playermatch.id %}" class="btn btn-danger btn-sm ">Alterar Status</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'playermatches:delete_playermatch' playermatch.id %}" class="btn btn-danger btn-sm ">Excluir</a>
+                            </td>
+                        </tr> 
+                    {% endfor %}
                 </tbody>
                 </table>
             </div>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import PlayerMatchForm
-from .models import PlayerMatch, Match, Player
+from .forms import PlayerMatchForm, PlayerMatchItemForm
+from .models import PlayerMatch, PlayerMatchItem, Match, Player
 
 # Create your views here.
 
@@ -34,6 +34,26 @@ def list_playermatches(request):
 def delete_playermatch(request, id_playermatch):
     playermatch = PlayerMatch.objects.get(id=id_playermatch)
     playermatch.delete()
+    return redirect('playermatches:list_playermatches')
+
+def add_playermatch_item(request, id_playermatch):
+    template_name = 'playermatches/add_playermatch_item.html'
+    context = {}
+    if request.method == 'POST':
+        form = PlayerMatchItemForm(request.POST)
+        if form.is_valid():
+            f = form.save(commit=False)
+            f.playermatch = PlayerMatch.objects.get(id=id_playermatch)
+            f.save()
+            form.save_m2m()
+            return redirect('playermatches:list_playermatches')
+    form = PlayerMatchItemForm()
+    context['form'] = form
+    return render(request, template_name, context)
+
+def delete_playermatch_item(request, id_playermatch_item):
+    playermatchitem = PlayerMatchItem.objects.get(id=id_playermatch_item)
+    playermatchitem.delete()
     return redirect('playermatches:list_playermatches')
 
 def edit_playermatch_status(request, id_playermatch):

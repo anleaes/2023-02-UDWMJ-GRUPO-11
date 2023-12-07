@@ -37,7 +37,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'matches.apps.MatchesConfig',
-    'playermatches.apps.PlayerMatchesConfig',
+    'playermatches.apps.PlayermatchesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
