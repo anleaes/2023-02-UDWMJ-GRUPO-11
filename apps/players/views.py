@@ -48,3 +48,16 @@ def delete_player(request, id_player):
     player = Player.objects.get(id=id_player)
     player.delete()
     return redirect('players:list_players')
+
+def search_players(request):
+    template_name = 'players/list_players.html'
+    query = request.GET.get('query')
+    player_inventories = PlayerInventory.objects.filter()
+    items = Item.objects.filter()
+    players = Player.objects.filter(last_name__icontains=query)
+    context = {
+        'players': players,
+        'items': items,
+        'player_inventories': player_inventories
+    }
+    return render(request,template_name, context)
