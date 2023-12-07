@@ -34,7 +34,7 @@
                 <tbody>
                     {% for player in players %}
                         <tr>
-                            <th scope="row">{{ player.id }}</th>
+                            <th>{{ player.id }}</th>
                             <td>{{ player.first_name }}</td>
                             <td>{{ player.last_name }}</td>
                             <td>{{ player.address }}</td>
@@ -47,14 +47,12 @@
                                     {% endif %}
                                 {% endfor %}
                             </td>
+                            <td>
                                 <a href="{% url 'players:edit_player' player.id %}" class="btn btn-primary btn-sm">Editar</a>
                             </td>
                             <td>
                                 <a href="{% url 'players:delete_player' player.id %}" class="btn btn-danger btn-sm ">Excluir</a>
                             </td>
-                            <td>   
-                                <a href="{% url 'playermatches:add_playermatch' player.id %}" class="btn btn-danger btn-sm ">Pedir</a>
-                           </td>
                         </tr> 
                     {% endfor %}
                 </tbody>
