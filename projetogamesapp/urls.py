@@ -20,6 +20,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('jogadores em partidas/', include('playermatches.urls', namespace='playermatches')),
+    path('partidas/', include('matches.urls', namespace='matches')),
     path('jogos/', include('games.urls', namespace='games')),
     path('itens/', include('items.urls', namespace='items')),
     path('jogadores/', include('players.urls', namespace='players')),
