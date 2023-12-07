@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    Lista de Partidas - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+    <div class="container">
+        <br />
+        <h5><b>Lista de Partidas</b></h5>
+        <div class="row">
+            <div class ="col-md-12">
+                <br />
+                    <a href="{% url 'matches:add_match' %}">Cadastro de nova partida</a>
+                <br />
+                <br />
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Jogo</th>
+                    <th scope="col">Dia</th>
+                    <th scope="col">Hora</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for match in matches %}
+                        <tr>
+                            <th scope="row">{{ match.id }}</th>
+                            <td>{{ match.game }}</td>
+                            <td>{{ match.day }}</td>
+                            <td>{{ match.hour }}</td>
+                            <td>
+                                {% if match.is_active == True %}
+                                    Ativo
+                                {% endif %}
+                                {% if match.is_active == False %}
+                                    Inativo
+                                {% endif %}
+                            </td>
+                            <td>{{ match.game }}</td>
+                            <td>
+                                <img src="{{ match.photo.url }}" width="50" height="50">
+                            </td>
+                            <td>
+                                <a href="{{ match.doc.url }}" >{{ match.doc.url }}</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'matches:edit_match' match.id %}" class="btn btn-primary btn-sm">Editar</a>
+                            </td>
+                            <td>    
+                                <a href="{% url 'matches:delete_match' match.id %}" class="btn btn-danger btn-sm ">Excluir</a>
+                            </td>
+                        </tr> 
+                    {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
