@@ -9,6 +9,7 @@ class Player(models.Model):
     last_name = models.CharField('Sobrenome', max_length=100) 
     address = models.CharField('Endereco', max_length=200)   
     email = models.EmailField('E-mail',null=False, blank=False)
+
     player_inventory = models.ManyToManyField(Item, through='PlayerInventory', blank=True)
 
     class Meta:
