@@ -36,6 +36,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'matches.apps.MatchesConfig',
+    'playermatches.apps.PlayerMatchesConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +46,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'widget_tweaks',
     'core.apps.CoreConfig',
+    'games.apps.GamesConfig',
+    'items.apps.ItemsConfig',
+    'players.apps.PlayersConfig',
 ]
 
 MIDDLEWARE = [
